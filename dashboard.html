@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard view - Track historical skin disease scans, model accuracies, system usage parameters, and analysis trends.">
+  <title>Analytics Dashboard - DermAI Skin Cancer Classification</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="layout-sidebar">
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+      <div class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Diagnostics</div>
+          <a class="sidebar-link active" id="side-link-overview"><i class="fa-solid fa-chart-pie"></i> Overview Stats</a>
+          <a class="sidebar-link" id="side-link-history" href="profile.html"><i class="fa-solid fa-clock-rotate-left"></i> Screening Log</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Engine Details</div>
+          <a class="sidebar-link" id="side-link-models"><i class="fa-solid fa-server"></i> Model Comparison</a>
+          <a class="sidebar-link" href="risk-calculator.html"><i class="fa-solid fa-triangle-exclamation"></i> Risk Profile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="main-content">
+      <div class="flex flex-between" style="margin-bottom: 30px; align-items: flex-start;">
+        <div>
+          <h1 style="font-size: 1.8rem; margin-bottom: 6px;">System Diagnostics</h1>
+          <p style="font-size: 0.9rem;">Overview of scanning diagnostics, classification metrics, and classifier accuracy analytics.</p>
+        </div>
+        <div class="flex gap-sm">
+          <button class="btn btn-outline btn-sm" id="refresh-charts-btn"><i class="fa-solid fa-arrows-rotate"></i> Refresh Data</button>
+          <a href="upload.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> New Scan</a>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-4" style="margin-bottom: 32px;">
+        <div class="stat-card blue">
+          <div class="stat-icon blue"><i class="fa-solid fa-microscope"></i></div>
+          <div class="stat-label">Total Classified Lesions</div>
+          <div class="stat-number" id="stat-total-scans">2,845</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> +14.2% this month</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="stat-label">AI Model Accuracy</div>
+          <div class="stat-number">94.5%</div>
+          <div class="stat-change up"><i class="fa-solid fa-check"></i> Standard validated</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon red"><i class="fa-solid fa-radiation"></i></div>
+          <div class="stat-label">Malignancy Ratio</div>
+          <div class="stat-number">18.4%</div>
+          <div class="stat-change down"><i class="fa-solid fa-minus"></i> Stable pattern</div>
+        </div>
+        <div class="stat-card teal">
+          <div class="stat-icon teal"><i class="fa-solid fa-user-doctor"></i></div>
+          <div class="stat-label">Physician Referrals</div>
+          <div class="stat-number">412</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> +8.5% referrals</div>
+        </div>
+      </div>
+
+      <!-- Chart Panel grid -->
+      <div class="grid grid-2" style="margin-bottom: 32px;">
+        
+        <!-- Left: Distribution chart -->
+        <div class="card" style="min-height: 380px; display: flex; flex-direction: column;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 20px;"><i class="fa-solid fa-chart-pie"></i> Skin Disease Classification Distribution</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="disease-dist-chart" style="width:100%;height:100%;"></canvas>
+          </div>
+        </div>
+
+        <!-- Right: Scanner Trends -->
+        <div class="card" style="min-height: 380px; display: flex; flex-direction: column;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 20px;"><i class="fa-solid fa-chart-line"></i> Monthly Scan Activities</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="monthly-trend-chart" style="width:100%;height:100%;"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comparison Metrics Chart Section -->
+      <div class="card" style="margin-bottom: 32px; min-height: 400px; display: flex; flex-direction: column;" id="model-comparison-card">
+        <h3 style="font-size: 1.1rem; margin-bottom: 20px;"><i class="fa-solid fa-chart-bar"></i> Deep Learning Model Performance Comparison (ISIC 2020 Validation)</h3>
+        <div style="flex: 1; position: relative;">
+          <canvas id="model-perf-chart" style="width:100%;height:100%;"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- CDN dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('dashboard');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+
+    // Init charts
+    function loadCharts() {
+      DashboardCharts.initDiseaseDistribution('disease-dist-chart');
+      DashboardCharts.initAccuracyModelComparison('model-perf-chart');
+      DashboardCharts.initMonthlyTrend('monthly-trend-chart');
+    }
+
+    loadCharts();
+
+    document.getElementById('refresh-charts-btn').addEventListener('click', () => {
+      loadCharts();
+      Toast.show('Analytics dashboard charts refreshed.', 'success');
+    });
+
+    // Theme changes updates chart layout colors
+    document.querySelectorAll('.nav-toggle-theme').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(loadCharts, 400);
+      });
+    });
+  </script>
+</body>
+</html>

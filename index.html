@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Skin Cancer Detection & Classification Website. Verify skin lesions, moles, or melanoma indicators instantly with deep learning models.">
+  <title>DermAI - Advanced AI Skin Cancer Classification & Screening</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR HOLDER -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- HERO SECTION -->
+  <section class="section flex-center" style="background: linear-gradient(135deg, rgba(21,101,192,0.08) 0%, rgba(38,166,154,0.08) 100%); min-height: 90vh; padding-top: calc(var(--navbar-h) + 20px); position: relative;">
+    <div class="container grid grid-2" style="align-items: center;">
+      <div class="hero-content fade-up">
+        <span class="section-badge"><i class="fa-solid fa-star-of-life"></i> Next-Gen Dermatological AI</span>
+        <h1 style="margin-bottom: 20px;">AI Skin Cancer Detection & Analysis</h1>
+        <p style="font-size: 1.1rem; margin-bottom: 36px; max-width: 540px;">
+          Empower yourself with clinical-grade skin lesion screening. Our state-of-the-art Deep Convolutional Neural Network detects Melanoma, Basal Cell Carcinoma, and other conditions in seconds.
+        </p>
+        <div class="flex gap-sm">
+          <a href="upload.html" class="btn btn-primary btn-lg">Start AI Scan <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#about" class="btn btn-outline btn-lg">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image flex-center fade-in" style="position: relative;">
+        <!-- Simulated UI Mockup -->
+        <div class="card card-glass" style="width: 100%; max-width: 440px; border-radius: var(--radius-xl); border-color: rgba(21,101,192,0.15); box-shadow: var(--shadow-xl); overflow: hidden; position: relative;">
+          <div style="background: var(--gradient); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 700; font-family: var(--font-display);"><i class="fa-solid fa-dna"></i> Scan Analysis</span>
+            <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">94.5% Accuracy</span>
+          </div>
+          <div style="padding: 24px; text-align: center;">
+            <div style="width: 160px; height: 160px; margin: 0 auto 20px; border-radius: 50%; border: 3px solid var(--border); overflow: hidden; position: relative; background: #E2E8F0;">
+              <!-- Simulated Lesion Image -->
+              <div style="position: absolute; inset: 0; background: radial-gradient(circle, #78350f 30%, #451a03 60%, transparent 80%); width: 70%; height: 70%; margin: auto; border-radius: 40% 60% 50% 50%; opacity: 0.85; filter: blur(2px);"></div>
+              <!-- Scanner Bar animation -->
+              <div style="position: absolute; width: 100%; height: 3px; background: var(--secondary); top: 0; left: 0; box-shadow: 0 0 10px var(--secondary); animation: scan-line 3s infinite linear;"></div>
+            </div>
+            <h4 style="margin-bottom: 4px;">Melanocytic Nevus</h4>
+            <p style="font-size: 0.8rem; margin-bottom: 16px;">Confidence Level Breakdown</p>
+            <div class="progress-bar" style="margin-bottom: 8px;">
+              <div class="progress-fill success" style="width: 91.4%"></div>
+            </div>
+            <div class="flex flex-between" style="font-size: 0.8rem; font-weight: 600;">
+              <span>Benign (Non-cancerous)</span>
+              <span style="color: var(--success);">91.4% Confidence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="section" style="background: var(--card);">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Outstanding Features</span>
+        <h2>Designed to Assist, Inform & Protect</h2>
+        <p class="mx-auto">A clinical assistant in your pocket. Built with state-of-the-art architectures for accurate screening.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card card-hover text-center">
+          <div class="stat-icon blue mx-auto"><i class="fa-solid fa-bolt"></i></div>
+          <h3 style="margin-bottom: 12px; font-size: 1.25rem;">Instant Screening</h3>
+          <p style="font-size: 0.9rem;">Upload a lesion photo and get classification results in less than 3 seconds. Real-time predictions via custom neural nets.</p>
+        </div>
+        <div class="card card-hover text-center">
+          <div class="stat-icon teal mx-auto"><i class="fa-solid fa-gauge-high"></i></div>
+          <h3 style="margin-bottom: 12px; font-size: 1.25rem;">94.5% Accuracy</h3>
+          <p style="font-size: 0.9rem;">Trained on over 30,000+ biopsy-confirmed skin images from the international ISIC Archive, maintaining medical-grade quality.</p>
+        </div>
+        <div class="card card-hover text-center">
+          <div class="stat-icon green mx-auto"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 style="margin-bottom: 12px; font-size: 1.25rem;">Explainable AI (XAI)</h3>
+          <p style="font-size: 0.9rem;">Grad-CAM heatmaps highlight infected cells and structural elements to show exactly why the model reached its conclusion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="section" id="about" style="background: var(--bg);">
+    <div class="container grid grid-2" style="align-items: center; gap: 48px;">
+      <div class="about-img fade-in">
+        <div class="card" style="padding: 24px; position: relative;">
+          <h4 style="margin-bottom: 16px;"><i class="fa-solid fa-circle-exclamation" style="color: var(--alert);"></i> The ABCDE Melanoma Rule</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 16px;">Early detection depends on identifying these crucial patterns in your skin lesions.</p>
+          <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <li><strong>A - Asymmetry:</strong> One half of the mole does not match the other half.</li>
+            <li><strong>B - Border:</strong> Edges are irregular, ragged, notched, or blurred.</li>
+            <li><strong>C - Color:</strong> The color is not uniform; contains shades of brown, black, or pink.</li>
+            <li><strong>D - Diameter:</strong> The spot is larger than 6 millimeters across (pencil eraser).</li>
+            <li><strong>E - Evolving:</strong> The mole is changing size, shape, color, or symptoms like itching.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="about-content fade-up">
+        <span class="section-badge">Education Center</span>
+        <h2 style="margin-bottom: 16px;">Understanding Melanoma & Skin Lesions</h2>
+        <p style="margin-bottom: 24px;">
+          Skin cancer is one of the most common cancers worldwide. Melanoma is particularly dangerous due to its ability to metastasize rapidly. Regular examinations and screening help locate suspicious lesions early, dramatically boosting treatment success rates.
+        </p>
+        <div class="alert alert-info">
+          <i class="fa-solid fa-user-doctor"></i>
+          <div>
+            <strong>Important Medical Disclaimer:</strong>
+            DermAI is an investigational screening assistant, not a primary medical diagnostics device. Always consult certified dermatologists for skin health concerns.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVENTION SECTION -->
+  <section class="section-sm" id="prevention" style="background: var(--card);">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Lesion Prevention & Daily Care</h2>
+        <p class="mx-auto">Simple daily routines to secure your skin from UV radiation and environmental factors.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card text-center" style="padding: 20px;">
+          <i class="fa-solid fa-sun" style="font-size: 2rem; color: var(--warning); margin-bottom: 12px;"></i>
+          <h4 style="margin-bottom: 8px;">Sun Protection</h4>
+          <p style="font-size: 0.8rem;">Apply broad-spectrum sunscreen with SPF 30 or higher every single day, even in cloudy seasons.</p>
+        </div>
+        <div class="card text-center" style="padding: 20px;">
+          <i class="fa-solid fa-user-shield" style="font-size: 2rem; color: var(--primary); margin-bottom: 12px;"></i>
+          <h4 style="margin-bottom: 8px;">Wear Coverups</h4>
+          <p style="font-size: 0.8rem;">Use UV-blocking sunglasses, broad-brimmed hats, and light long sleeves during high UV index hours.</p>
+        </div>
+        <div class="card text-center" style="padding: 20px;">
+          <i class="fa-solid fa-clock" style="font-size: 2rem; color: var(--secondary); margin-bottom: 12px;"></i>
+          <h4 style="margin-bottom: 8px;">Peak Hour Limit</h4>
+          <p style="font-size: 0.8rem;">Limit outdoor activities between 10:00 AM and 4:00 PM when solar radiation is strongest.</p>
+        </div>
+        <div class="card text-center" style="padding: 20px;">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; color: var(--success); margin-bottom: 12px;"></i>
+          <h4 style="margin-bottom: 8px;">Monthly Self Check</h4>
+          <p style="font-size: 0.8rem;">Observe all moles and birthmarks once a month and record changes to show your doctor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER HOLDER -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('home');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+  </script>
+</body>
+</html>
