@@ -6,7 +6,7 @@
   <meta name="description" content="AI Skin Cancer Detection & Classification Website. Verify skin lesions, moles, or melanoma indicators instantly with deep learning models.">
   <title>DermAI - Advanced AI Skin Cancer Classification & Screening</title>
   <!-- CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -39,7 +39,7 @@
           <div style="padding: 24px; text-align: center;">
             <div style="width: 160px; height: 160px; margin: 0 auto 20px; border-radius: 50%; border: 3px solid var(--border); overflow: hidden; position: relative; background: #E2E8F0;">
               <!-- Simulated Lesion Image -->
-              <div style="position: absolute; inset: 0; background: radial-gradient(circle, #78350f 30%, #451a03 60%, transparent 80%); width: 70%; height: 70%; margin: auto; border-radius: 40% 60% 50% 40%; filter: blur(1px);"></div>
+              <div style="position: absolute; inset: 0; background: radial-gradient(circle, #78350f 30%, #451a03 60%, transparent 80%); width: 70%; height: 70%; margin: auto; border-radius: 40% 60% 50% 50%; opacity: 0.85; filter: blur(2px);"></div>
               <!-- Scanner Bar animation -->
               <div style="position: absolute; width: 100%; height: 3px; background: var(--secondary); top: 0; left: 0; box-shadow: 0 0 10px var(--secondary); animation: scan-line 3s infinite linear;"></div>
             </div>
@@ -106,7 +106,7 @@
         <span class="section-badge">Education Center</span>
         <h2 style="margin-bottom: 16px;">Understanding Melanoma & Skin Lesions</h2>
         <p style="margin-bottom: 24px;">
-          Skin cancer is one of the most common cancers worldwide. Melanoma is particularly dangerous due to its ability to metastasize rapidly. Regular examinations and screening help locate suspicious lesions early.
+          Skin cancer is one of the most common cancers worldwide. Melanoma is particularly dangerous due to its ability to metastasize rapidly. Regular examinations and screening help locate suspicious lesions early, dramatically boosting treatment success rates.
         </p>
         <div class="alert alert-info">
           <i class="fa-solid fa-user-doctor"></i>
@@ -155,10 +155,123 @@
   <div id="footer-placeholder"></div>
 
   <!-- Scripts -->
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
   <script>
     document.getElementById('navbar-placeholder').innerHTML = renderNavbar('home');
     document.getElementById('footer-placeholder').innerHTML = renderFooter();
   </script>
+
+<!-- DermAI Voice Greeting -->
+<script>
+(function() {
+    var greetingDone = false;
+    var activeUtterances = []; // Prevent Garbage Collection
+    var textToSpeak = 'Hi Kiran, how are you? I am DermAI, your clinical skin cancer screening assistant. I can help you analyze skin lesions to classify abnormalities like melanoma, calculate malignancy risk scores, extract clinical ABCDE metrics including asymmetry, border, color, and diameter, and log skin anomalies. My key advantages include patient-empowering early warnings, visual Grad-CAM localization heatmaps, and long-term longitudinal skin logging. Let us get started!';
+    
+    function speakGreeting() {
+        if (greetingDone) return;
+        
+        if (!window.speechSynthesis) {
+            greetingDone = true;
+            return;
+        }
+
+        try {
+            if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+            }
+            window.speechSynthesis.cancel();
+        } catch(e) {
+            console.error("Speech reset failed:", e);
+        }
+
+        var msg = new SpeechSynthesisUtterance(textToSpeak);
+
+        // Try to find a nice English voice
+        var voices = window.speechSynthesis.getVoices();
+        if (voices && voices.length > 0) {
+            var preferredVoice = voices.find(function(v) {
+                return v.lang.startsWith('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Zira') || v.name.includes('David'));
+            }) || voices.find(function(v) {
+                return v.lang.startsWith('en');
+            });
+            if (preferredVoice) {
+                msg.voice = preferredVoice;
+            }
+        }
+
+        msg.rate = 0.95;
+        msg.pitch = 1.05;
+        msg.volume = 1;
+
+        msg.onstart = function() {
+            greetingDone = true;
+            sessionStorage.setItem('dermAiVoiceGreetingPlayed', 'true');
+            cleanupListeners();
+        };
+
+        msg.onend = function() {
+            activeUtterances = [];
+        };
+
+        msg.onerror = function(e) {
+            console.error("Speech synthesis error:", e);
+            if (e.error === 'not-allowed') {
+                greetingDone = false;
+            } else {
+                greetingDone = true;
+                cleanupListeners();
+            }
+            activeUtterances = [];
+        };
+
+        activeUtterances.push(msg);
+        window.activeUtterancesList = activeUtterances;
+
+        window.speechSynthesis.speak(msg);
+    }
+
+    function cleanupListeners() {
+        document.removeEventListener('click', triggerSpeech);
+        document.removeEventListener('keydown', triggerSpeech);
+        document.removeEventListener('touchstart', triggerSpeech);
+    }
+
+    function triggerSpeech() {
+        speakGreeting();
+    }
+
+    function initGreeting() {
+        if (sessionStorage.getItem('dermAiVoiceGreetingPlayed')) {
+            greetingDone = true;
+            return;
+        }
+
+        // 1. Attempt to speak automatically on load
+        speakGreeting();
+
+        // 2. Register fallback triggers for user activation
+        document.addEventListener('click', triggerSpeech);
+        document.addEventListener('keydown', triggerSpeech);
+        document.addEventListener('touchstart', triggerSpeech);
+
+        // Re-check voices when loaded dynamically
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = function() {
+                window.speechSynthesis.getVoices();
+                if (!greetingDone) {
+                    speakGreeting();
+                }
+            };
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGreeting);
+    } else {
+        initGreeting();
+    }
+})();
+</script>
 </body>
 </html>
