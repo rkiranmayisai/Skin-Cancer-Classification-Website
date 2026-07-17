@@ -1,63 +1,61 @@
-# 🔬 DermAI – Advanced AI Skin Cancer Classification & Screening
+# 🔬 DermAI – Skin Cancer Classification Platform
 
-Welcome to **DermAI**! A premium, interactive, and responsive web application designed for patients, clinical researchers, and dermatologists to screen skin lesions, estimate malignancy risks, and generate clinical reports.
+Welcome to **DermAI**! A premium, responsive web application designed to screen skin lesions, extract clinical ABCD criteria (Asymmetry, Border, Color, and Diameter), estimate malignancy risks, and generate clinical text reports. 
 
-This project features a **Malignancy Risk Calculator**, client-side **AI Image Screening** supporting multi-class classification, and professional **PDF Report Generation** with Grad-CAM heatmaps.
+This version features a fully functional **Flask (Python) backend** that manages predictions and sample image catalogs, coupled with an interactive **glassmorphic frontend**.
 
 ---
 
 ## ✨ Features
 
-### 1. 🔬 Real-Time AI Skin Lesion Diagnostics
-* **Ensemble Model Inference**: Simulates detection of 7 major skin lesion classes (including Melanoma, Melanocytic Nevi, Basal Cell Carcinoma, Actinic Keratosis, Benign Keratosis, Dermatofibroma, and Vascular Lesions) with a combined 94.5% accuracy.
-* **Multi-channel Upload**: Supports drag-and-drop file upload, manual browser selection, and a live web camera interface for capturing real-time skin anomalies.
+### 1. 🔍 Live Lesion Scanner
+* **Multi-channel Input**: Upload lesion photos, capture real-time frames using a webcam, or select from pre-loaded clinical sample images.
+* **Canvas Visualization**: Renders the image on a canvas with animated scanning indicator lines, automatically drawing bounding box overlays around detected lesions with confidence levels.
 
-### 2. 👁️ Explainable AI (XAI) Grad-CAM Heatmaps
-* **Grad-CAM Overlay**: Displays a simulated Grad-CAM heatmap visualization to pinpoint active cellular regions where the neural net concentrated its attention.
-* **Diagnostic Visualizer**: A tabbed view to switch between the original high-resolution lesion photo and the Grad-CAM activation heatmap.
+### 2. 📏 Clinical ABCD Criteria Extraction
+* **Quantitative Analysis**: Extracts and displays normalized scores for Asymmetry, Border irregularity, Color variance, and Diameter (in millimeters).
+* **Progress Meter Bars**: Visually maps ABCD indicators on color-coded progress bars to highlight areas of concern.
 
-### 3. ⚠️ Multi-Factor Malignancy Risk Calculator
-* **Risk Assessment Questionnaire**: Calculates risk indices (Low, Moderate, High) based on clinical factors like age, skin type (Fitzpatrick scale), history of severe sunburns, family genetics, peak UV exposure frequency, and mole counts.
-* **Interactive Needle Gauge**: Animates a dial indicator pointing to the patient's risk index, complete with custom safety guidance.
+### 3. ⚠️ Malignancy Risk Score & Clinical Assessment
+* **Gauge Indicator**: Animates a radial dial pointing to the overall risk score (out of 100).
+* **Clinical Info Grid**: Displays medical name, urgency, ICD-10 medical code classification, and customized SPF and sunscreen recommendations.
 
-### 4. 📊 Longitudinal Skin Logging & User Dashboard
-* **Analytics & Performance Visuals**: Connects a robust dashboard powered by Chart.js showing monthly scanning trends, diagnostic accuracy compared across ResNet50, EfficientNet-B4, and DenseNet-121, and lesion type distribution.
-* **Persistent History Tracking**: Automatically preserves previous scan logs client-side using local storage.
+### 4. 📊 Analytical Dashboard
+* **Scans Summary**: Counts total scans, critical findings, high-risk cases, and benign moles.
+* **Dermatological Guidelines**: Showcases education blocks explaining self-checks, ABCD rules, sun protection, and the "Ugly Duckling" sign.
 
-### 5. 📄 Professional PDF Diagnostic Reports
-* **One-Click Exports**: Generates clean, medical-themed PDF summaries containing patient info, classifier breakdown, original image, and Grad-CAM heatmap.
-* **Clinical Guidelines**: Automatically inserts actionable recommendations and safety disclaimers for patient guidance.
+### 5. 📋 Lesion Catalog
+* **Prevalence & Info Cards**: Explains common lesions (e.g. Melanoma, Basal Cell Carcinoma) with detailed descriptions, ICD codes, and prevalence statistics.
 
-### 6. 🌓 Modern Theme & Aesthetic Interface
-* **Elegant Interface**: Built with a gorgeous glassmorphism UI, fluid transitions, smooth card animations, and crisp iconography.
-* **Theme Switcher**: One-click toggling between light and dark visual themes.
+### 6. 🗂️ Persistent Scan History & CSV Exports
+* **Scan Logging**: Saves scan details (ID, label, risk score, confidence, and timestamp) to a table.
+* **Data Management**: Supports CSV data sheet exports and history clearance.
+
+### 7. 📄 One-Click Report Exports
+* **Diagnostic Report**: Generates a clean text file summary containing patient info, classifier breakdown, ABCD metrics, and actionable clinical advice.
 
 ---
 
 ## 🛠️ Technology Stack
 
-* **Frontend**: Semantic HTML5, Custom Vanilla CSS3 (featuring HSL variables, glassmorphic styles, custom grids, responsive designs), Vanilla JavaScript (ES6+).
-* **Libraries**:
-  * [Chart.js](https://www.chartjs.org/) (Data visualization & analytical dashboard)
-  * [jsPDF](https://github.com/parallax/jsPDF) (Client-side PDF compilation via CDN)
-  * [FontAwesome](https://fontawesome.com/) (Iconography)
-* **APIs & Web Engines**:
-  * [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices) (Real-time camera feed capture)
-  * [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) (Heatmap rendering and image capturing)
-  * [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) (Longitudinal history logging)
+* **Backend**: Python 3, Flask, Custom analyzer and data helpers.
+* **Frontend**: HTML5, Custom CSS3 (featuring HSL design tokens, glassmorphism, responsive grids), Vanilla JavaScript (ES6+).
+* **APIs**: Custom Local REST API connecting the frontend with the Flask python server.
 
 ---
 
 ## 🚀 Getting Started
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/skin-cancer-classification.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd skin-cancer-classification
-   ```
-3. Open `index.html` directly in your web browser, or serve it using a lightweight local server:
-   * **Python**: `python -m http.server 8000`
-   * **Node.js**: `npx serve`
+### 1. Start the Flask Backend
+Navigate to the directory and run the python app:
+```bash
+python run.py
+# or
+python backend/app.py
+```
+This launches the server at `http://127.0.0.1:5000`.
+
+### 2. Launch the Frontend
+Simply open the `frontend/index.html` file in your preferred web browser, or serve it using a lightweight local server:
+* **Python**: `python -m http.server 8000` (from inside the `frontend` folder)
+* **VS Code**: Use the Live Server extension.
