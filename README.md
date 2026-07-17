@@ -2,38 +2,33 @@
 
 Welcome to **DermAI**! A premium, interactive, and responsive web application designed for patients, clinical researchers, and dermatologists to screen skin lesions, estimate malignancy risks, and generate clinical reports.
 
-This project features a fully integrated **AI Dermatological Assistant** that greets you with a personalized voice greeting (tailored for Kiran), an **AI Chatbot (DermBot)**, a **Malignancy Risk Calculator**, client-side **AI Image Screening** supporting multi-class classification, and professional **PDF Report Generation** with Grad-CAM heatmaps.
+This project features a **Malignancy Risk Calculator**, client-side **AI Image Screening** supporting multi-class classification, and professional **PDF Report Generation** with Grad-CAM heatmaps.
 
 ---
 
 ## ✨ Features
 
-### 1. 🎙️ Voice Greeting & AI Dermatological Assistant
-* **Personalized Welcome**: Welcomes user "Kiran" on startup using the Web Speech API with an overview of features and capabilities (early warning, Grad-CAM, longitudinal logging).
-* **24/7 AI Chatbot (DermBot)**: Interactive assistant trained on dermatological queries to answer questions about symptoms, prevention, AI functionality, and doctor visits.
-* **Interactive Floating Window**: Chatbot FAB interface that toggles an elegant web-chat panel for real-time conversation.
-
-### 2. 🔬 Real-Time AI Skin Lesion Diagnostics
+### 1. 🔬 Real-Time AI Skin Lesion Diagnostics
 * **Ensemble Model Inference**: Simulates detection of 7 major skin lesion classes (including Melanoma, Melanocytic Nevi, Basal Cell Carcinoma, Actinic Keratosis, Benign Keratosis, Dermatofibroma, and Vascular Lesions) with a combined 94.5% accuracy.
 * **Multi-channel Upload**: Supports drag-and-drop file upload, manual browser selection, and a live web camera interface for capturing real-time skin anomalies.
 
-### 3. 👁️ Explainable AI (XAI) Grad-CAM Heatmaps
+### 2. 👁️ Explainable AI (XAI) Grad-CAM Heatmaps
 * **Grad-CAM Overlay**: Displays a simulated Grad-CAM heatmap visualization to pinpoint active cellular regions where the neural net concentrated its attention.
 * **Diagnostic Visualizer**: A tabbed view to switch between the original high-resolution lesion photo and the Grad-CAM activation heatmap.
 
-### 4. ⚠️ Multi-Factor Malignancy Risk Calculator
+### 3. ⚠️ Multi-Factor Malignancy Risk Calculator
 * **Risk Assessment Questionnaire**: Calculates risk indices (Low, Moderate, High) based on clinical factors like age, skin type (Fitzpatrick scale), history of severe sunburns, family genetics, peak UV exposure frequency, and mole counts.
 * **Interactive Needle Gauge**: Animates a dial indicator pointing to the patient's risk index, complete with custom safety guidance.
 
-### 5. 📊 Longitudinal Skin Logging & User Dashboard
+### 4. 📊 Longitudinal Skin Logging & User Dashboard
 * **Analytics & Performance Visuals**: Connects a robust dashboard powered by Chart.js showing monthly scanning trends, diagnostic accuracy compared across ResNet50, EfficientNet-B4, and DenseNet-121, and lesion type distribution.
 * **Persistent History Tracking**: Automatically preserves previous scan logs client-side using local storage.
 
-### 6. 📄 Professional PDF Diagnostic Reports
+### 5. 📄 Professional PDF Diagnostic Reports
 * **One-Click Exports**: Generates clean, medical-themed PDF summaries containing patient info, classifier breakdown, original image, and Grad-CAM heatmap.
 * **Clinical Guidelines**: Automatically inserts actionable recommendations and safety disclaimers for patient guidance.
 
-### 7. 🌓 Modern Theme & Aesthetic Interface
+### 6. 🌓 Modern Theme & Aesthetic Interface
 * **Elegant Interface**: Built with a gorgeous glassmorphism UI, fluid transitions, smooth card animations, and crisp iconography.
 * **Theme Switcher**: One-click toggling between light and dark visual themes.
 
@@ -47,7 +42,6 @@ This project features a fully integrated **AI Dermatological Assistant** that gr
   * [jsPDF](https://github.com/parallax/jsPDF) (Client-side PDF compilation via CDN)
   * [FontAwesome](https://fontawesome.com/) (Iconography)
 * **APIs & Web Engines**:
-  * [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) (Speech Synthesis greeting engine)
   * [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices) (Real-time camera feed capture)
   * [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) (Heatmap rendering and image capturing)
   * [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) (Longitudinal history logging)

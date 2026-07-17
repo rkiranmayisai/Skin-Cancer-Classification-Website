@@ -371,102 +371,11 @@ function renderFooter() {
   </footer>`;
 }
 
-// ── Chatbot ───────────────────────────────────────────────
-const Chatbot = {
-  open: false,
-  responses: {
-    melanoma: "Melanoma is the most serious type of skin cancer. It develops from pigment-producing cells (melanocytes). Early detection is crucial — look for asymmetry, border irregularity, color variation, diameter >6mm, and evolution (ABCDE rule).",
-    benign: "A benign skin lesion is non-cancerous. Common examples include moles, seborrheic keratosis, and dermatofibromas. While generally harmless, regular monitoring is recommended.",
-    malignant: "A malignant lesion is cancerous and can spread to other parts of the body. Immediate dermatologist consultation is recommended if our AI detects malignancy.",
-    symptoms: "Common warning signs:\n• Asymmetrical moles\n• Irregular or ragged borders\n• Multiple colors in one lesion\n• Diameter larger than a pencil eraser\n• Any changing, bleeding, or itching spot",
-    prevention: "Skin cancer prevention tips:\n• Apply SPF 30+ sunscreen daily\n• Avoid peak sun hours (10am–4pm)\n• Wear protective clothing & hats\n• Never use tanning beds\n• Perform monthly self-skin exams\n• Annual dermatologist check-ups",
-    accuracy: "Our AI model achieves 94.5% accuracy on the ISIC 2020 dataset, using an ensemble of ResNet50, EfficientNet-B4, and DenseNet-121. Confidence scores are provided with each prediction.",
-    upload: "To analyze your skin lesion: 1) Click 'AI Scan' in the navigation, 2) Upload a clear image of the lesion, 3) Our AI will classify it in seconds with a detailed report.",
-    report: "Yes! After each analysis you can download a comprehensive PDF report containing the uploaded image, AI prediction, confidence scores, heatmap visualization, and medical recommendations.",
-    doctor: "Our AI is a screening tool, not a diagnosis. Always consult a certified dermatologist for professional advice. We recommend booking an appointment if:\n• Confidence > 70% for malignancy\n• You notice any ABCDE signs\n• Any skin change that worries you",
-    risk: "Use our Risk Calculator to assess your personal risk score based on age, skin type, family history, and sun exposure history. Early risk assessment helps with preventive care.",
-    hello: "Hello! 👋 I'm DermBot, your AI skin health assistant. I can help you with:\n• Information about skin cancer types\n• Prevention tips\n• How to use our AI scanner\n• Understanding your results\n\nWhat would you like to know?",
-    default: "I'm here to help with skin health questions! Try asking about:\n• Melanoma symptoms\n• Prevention tips\n• How the AI works\n• Understanding results\n• Risk factors"
-  },
-
-  getResponse(msg) {
-    const m = msg.toLowerCase();
-    if (m.match(/hello|hi|hey|namaste|hai/)) return this.responses.hello;
-    if (m.match(/melanoma/)) return this.responses.melanoma;
-    if (m.match(/benign/)) return this.responses.benign;
-    if (m.match(/malignant|cancer/)) return this.responses.malignant;
-    if (m.match(/symptom|sign|abcde/)) return this.responses.symptoms;
-    if (m.match(/prevent|protect|sunscreen/)) return this.responses.prevention;
-    if (m.match(/accura|model|ai|accuracy/)) return this.responses.accuracy;
-    if (m.match(/upload|scan|image|photo/)) return this.responses.upload;
-    if (m.match(/report|pdf|download/)) return this.responses.report;
-    if (m.match(/doctor|consult|appointment/)) return this.responses.doctor;
-    if (m.match(/risk|calculator|score/)) return this.responses.risk;
-    return this.responses.default;
-  },
-
-  toggle() {
-    this.open = !this.open;
-    const win = document.getElementById('chatbot-window');
-    const fab = document.getElementById('chatbot-fab');
-    if (win) win.classList.toggle('open', this.open);
-    if (fab) fab.innerHTML = this.open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-robot"></i>';
-  },
-
-  send() {
-    const inp = document.getElementById('chatbot-input');
-    if (!inp) return;
-    const msg = inp.value.trim();
-    if (!msg) return;
-    inp.value = '';
-    this.addMessage(msg, 'user');
-    setTimeout(() => this.addMessage(this.getResponse(msg), 'bot'), 600);
-  },
-
-  addMessage(text, who) {
-    const msgs = document.getElementById('chatbot-messages');
-    if (!msgs) return;
-    const div = document.createElement('div');
-    div.className = `chat-msg ${who}`;
-    div.innerHTML = `<div class="chat-bubble">${text.replace(/\n/g, '<br>')}</div>`;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  },
-
-  initUI() {
-    const html = `
-    <button class="chatbot-fab" id="chatbot-fab" onclick="Chatbot.toggle()" title="Ask DermBot">
-      <i class="fa-solid fa-robot"></i>
-    </button>
-    <div class="chatbot-window" id="chatbot-window">
-      <div class="chatbot-header">
-        <div class="chatbot-avatar"><i class="fa-solid fa-robot"></i></div>
-        <div>
-          <div style="font-weight:700;font-size:0.95rem;">DermBot</div>
-          <div style="font-size:0.75rem;opacity:0.8;">🟢 Online · AI Health Assistant</div>
-        </div>
-        <button onclick="Chatbot.toggle()" style="margin-left:auto;background:rgba(255,255,255,0.2);border:none;color:white;width:28px;height:28px;border-radius:50%;cursor:pointer;">✕</button>
-      </div>
-      <div class="chatbot-messages" id="chatbot-messages"></div>
-      <div class="chatbot-input-row">
-        <input type="text" id="chatbot-input" placeholder="Ask about skin health..." onkeydown="if(event.key==='Enter')Chatbot.send()">
-        <button class="btn btn-primary btn-sm btn-icon" onclick="Chatbot.send()"><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
-    </div>`;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = html;
-    document.body.appendChild(wrapper.firstElementChild);
-    document.body.appendChild(wrapper.lastElementChild);
-    this.addMessage("Hello! 👋 I'm DermBot. How can I help you today?", 'bot');
-  }
-};
-
 // ── Init on DOM Ready ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   ThemeManager.init();
   Navbar.init();
   initAnimations();
-  Chatbot.initUI();
 
   // Init tabs
   document.querySelectorAll('[data-tabs]').forEach(el => initTabs(el));
